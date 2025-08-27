@@ -4,9 +4,13 @@
 
 .App-logo {
   height: 50vh;
+}
+
+.App-header {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  position: relative;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
 }

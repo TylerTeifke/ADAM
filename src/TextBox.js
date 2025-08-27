@@ -4,7 +4,12 @@
 import "./TextBox.css"
 
 const TextBox = ({ text, textColor }) => {
-    <p>{text}</p>
+
+    return (
+        <div>
+            <p style={{color: textColor}}>{text}</p>
+        </div>
+    )
 }
 
 export default TextBox
