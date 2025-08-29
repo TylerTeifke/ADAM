@@ -1,14 +1,16 @@
 import './App.css';
 import { useState } from 'react';
-import ADAM from './ADAM.png';
+import ADAM from './Images/ADAM.png';
+import ADAM_smug from './Images/ADAM_smug.png'
+import ADAM_confused from './Images/ADAM_confused.png'
 import TextBox from './TextBox';
 
 function App() {
   //Will store the information for each text box
   const textBoxxes = [
-    {text: "Hello user! I am the Advanced Developmental Automated Machine. But you can call me ADAM. Click me to see something cool.", color: "black"},
-    {text: "See, pretty cool.", color: "red"},
-    {text: "What? You don't seem very impressed.", color: "blue"}
+    {text: "Hello user! I am the Advanced Developmental Automated Machine. But you can call me ADAM. Click me to see something cool.", color: "black", image: ADAM},
+    {text: "See, pretty cool.", color: "red", image: ADAM_smug},
+    {text: "What? You don't seem very impressed.", color: "blue", image:ADAM_confused}
   ]
 
   //Will be used to iterate between text boxes
@@ -27,8 +29,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={ADAM} className="App-logo" alt="logo" onClick={handleClick}/>
-        <TextBox text={textBoxxes[currentBox].text} textColor={textBoxxes[currentBox].color}/>
+        <TextBox text={textBoxxes[currentBox].text} textColor={textBoxxes[currentBox].color} image={textBoxxes[currentBox].image} handleClick={handleClick}/>
       </header>
     </div>
   );

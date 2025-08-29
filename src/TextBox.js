@@ -3,10 +3,11 @@
  */
 import "./TextBox.css"
 
-const TextBox = ({ text, textColor }) => {
+const TextBox = ({ text, textColor, image, handleClick }) => {
 
     return (
         <div>
+            <img src={image} className="App-logo" alt="logo" onClick={handleClick}/>
             <p style={{color: textColor}}>{text}</p>
         </div>
     )
