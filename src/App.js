@@ -9,17 +9,22 @@ import TextBox from './TextBox';
 function App() {
   //Will store the information for each text box
   const textBoxxes = [
-    {text: "Hello user! I am the Advanced Developmental Automated Machine. But you can call me ADAM. Click me to see something cool.", color: "black", image: ADAM},
-    {text: "See, pretty cool.", color: "green", image: ADAM_smug},
-    {text: "What? You don't seem very impressed.", color: "blue", image: ADAM_confused},
-    {text: "Alright then, how about this.", color: "red", image: ADAM_angry},
-    {text: "Now I bet your impressed.", color: "green", image: ADAM_smug}
+    {text: "Hello user! I am the Advanced Developmental Automated Machine. But you can call me ADAM. Click me to see something cool.", color: "black", image: ADAM, animated: false},
+    {text: "See, pretty cool.", color: "green", image: ADAM_smug, animated: false},
+    {text: "What? You don't seem very impressed.", color: "blue", image: ADAM_confused, animated: false},
+    {text: "Alright then, how about this.", color: "red", image: ADAM_angry, animated: false},
+    {text: "Now I bet your impressed.", color: "green", image: ADAM_smug, animated: false},
+    {text: "Still nothing.", color: "blue", image: ADAM_confused, animated: false},
+    {text: "Alright wise guy, prepare to have your socks blown off.", color: "red", image: ADAM_angry, animated: false},
+    {text: "BEHOLD.", color: "green", image: ADAM_smug, animated: true}
   ]
 
   //Will be used to iterate between text boxes
   const [currentBox, setCurrentBox] = useState(0)
   //Will be used to change the color of the background
   const [bgColor, setBgColor] = useState('white')
+  //Will be used to activate and deactivate the animation
+  //const [animated, setAnimated] = useState(false)
 
   //Will run whenever there is a change made to the background color
   useEffect(() => {
@@ -43,7 +48,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TextBox text={textBoxxes[currentBox].text} textColor={textBoxxes[currentBox].color} image={textBoxxes[currentBox].image} handleClick={handleClick}/>
+        <TextBox 
+          text={textBoxxes[currentBox].text} 
+          textColor={textBoxxes[currentBox].color} 
+          image={textBoxxes[currentBox].image} 
+          animated={textBoxxes[currentBox].animated} 
+          handleClick={handleClick}
+        />
       </header>
     </div>
   );

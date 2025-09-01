@@ -3,11 +3,11 @@
  */
 import "./TextBox.css"
 
-const TextBox = ({ text, textColor, image, handleClick }) => {
+const TextBox = ({ text, textColor, image, handleClick, animated }) => {
 
     return (
         <div>
-            <img src={image} className="App-logo" alt="logo" onClick={handleClick}/>
+            <img src={image} className={`ADAM ${animated ? "spin" : ""}`} alt="image" onClick={handleClick}/>
             <p style={{color: textColor}}>{text}</p>
         </div>
     )
