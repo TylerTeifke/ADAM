@@ -7,7 +7,7 @@ const TextBox = ({ text, textColor, image, handleClick, animated }) => {
 
     return (
         <div>
-            <img src={image} className={`ADAM ${animated ? "spin" : ""}`} alt="image" onClick={handleClick}/>
+            <img src={image} className={`ADAM ${animated}`} alt="image" onClick={handleClick}/>
             <p style={{color: textColor}}>{text}</p>
         </div>
     )
