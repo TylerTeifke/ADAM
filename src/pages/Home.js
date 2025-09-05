@@ -1,5 +1,5 @@
 import './Home.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ADAM from '../Images/ADAM.png';
 import ADAM_smug from '../Images/ADAM_smug.png'
 import ADAM_confused from '../Images/ADAM_confused.png'
@@ -25,13 +25,22 @@ const Home = () => {
     {text: "Oh, crap you can see my outline!", color: "blue", image: ADAM_confused, animated: ""},
     {text: "Let me just change that.", color: "blue", image: ADAM_confused, animated: ""},
     {text: "Whew, that was embarrassing.", color: "black", image: ADAM, animated: ""},
-    {text: "Just pretend you didn't see that.", color: "black", image: ADAM, animated: ""}
+    {text: "Just pretend you didn't see that.", color: "black", image: ADAM, animated: ""},
+    {text: "Hey I have an idea.", color: "black", image: ADAM, animated: ""},
+    {text: "Why don't I share with you some of my unlimited power.", color: "green", image: ADAM_smug, animated: ""},
+    {text: "Just type in what color you want the background to be and click Apply.", color: "black", image: ADAM, animated: ""}
   ]
 
   //Will be used to iterate between text boxes
   const [currentBox, setCurrentBox] = useState(0)
   //Will be used to change the color of the background
   const [bgColor, setBgColor] = useState('white')
+  //Will be used to determine if the components that change the background will be rendered
+  const [changeBgColor, setChangeBgColor] = useState(false)
+  //Will be used to track wht color the user wants to change the background to
+  const [color, setColor] = useState("")
+
+  const inputRef = useRef()
 
   //Will run whenever there is a change made to the background color
   useEffect(() => {
@@ -40,6 +49,7 @@ const Home = () => {
 
   //Will change the text box upon clicking ADAM
   const handleClick = () => {
+    console.log("test")
     if(currentBox === textBoxxes.length - 1){
       setBgColor('white')
       setCurrentBox(0)
@@ -51,8 +61,18 @@ const Home = () => {
       if(currentBox === 13){
         setBgColor('white')
       }
+      if(currentBox === 18){
+        setChangeBgColor(true)
+      }
       setCurrentBox(currentBox + 1)
     }
+  }
+
+  //Will change the bg color to whatever the user wants it to be
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setBgColor(color)
+    setColor("")
   }
 
   return (
@@ -66,6 +86,28 @@ const Home = () => {
           handleClick={handleClick}
         />
       </header>
+      {changeBgColor && (
+          <form className='addForm' onSubmit={handleSubmit}>
+            <label htmlFor='changeColor'></label>
+            <input
+              autoFocus
+              ref={inputRef}
+              id='changeColor'
+              type='text'
+              placeholder='Color'
+              required
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+            <button
+              type='submit'
+              aria-label='Change Color'
+              onClick={() => inputRef.current.focus()}
+            >
+              Apply
+            </button>
+          </form>
+        )}
     </div>
   );
 }
