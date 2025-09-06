@@ -1,10 +1,11 @@
 import './Home.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import ADAM from '../Images/ADAM.png';
 import ADAM_smug from '../Images/ADAM_smug.png'
 import ADAM_confused from '../Images/ADAM_confused.png'
 import ADAM_angry from '../Images/ADAM_angry.png'
 import TextBox from '../components/TextBox';
+import Form from '../components/Form';
 
 const Home = () => {
   //Will store the information for each text box
@@ -40,8 +41,6 @@ const Home = () => {
   //Will be used to track wht color the user wants to change the background to
   const [color, setColor] = useState("")
 
-  const inputRef = useRef()
-
   //Will run whenever there is a change made to the background color
   useEffect(() => {
     document.body.style.backgroundColor = bgColor
@@ -53,6 +52,7 @@ const Home = () => {
     if(currentBox === textBoxxes.length - 1){
       setBgColor('white')
       setCurrentBox(0)
+      setChangeBgColor(false)
     }
     else{
       if(currentBox === 3){
@@ -87,27 +87,8 @@ const Home = () => {
         />
       </header>
       {changeBgColor && (
-          <form className='addForm' onSubmit={handleSubmit}>
-            <label htmlFor='changeColor'></label>
-            <input
-              autoFocus
-              ref={inputRef}
-              id='changeColor'
-              type='text'
-              placeholder='Color'
-              required
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-            />
-            <button
-              type='submit'
-              aria-label='Change Color'
-              onClick={() => inputRef.current.focus()}
-            >
-              Apply
-            </button>
-          </form>
-        )}
+        <Form handleSubmit={handleSubmit} color={color} setColor={setColor}/>
+      )}
     </div>
   );
 }
