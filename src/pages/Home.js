@@ -1,11 +1,14 @@
-import './Home.css';
+import './Page.css';
 import { useState, useEffect } from 'react';
 import ADAM from '../Images/ADAM.png';
 import ADAM_smug from '../Images/ADAM_smug.png'
 import ADAM_confused from '../Images/ADAM_confused.png'
 import ADAM_angry from '../Images/ADAM_angry.png'
+import right_arrow from '../Images/right_arrow.png'
+import left_arrow from '../Images/left_arrow.png'
 import TextBox from '../components/TextBox';
 import Form from '../components/Form';
+import Arrow from '../components/Arrow';
 
 const Home = () => {
   //Will store the information for each text box
@@ -48,7 +51,6 @@ const Home = () => {
 
   //Will change the text box upon clicking ADAM
   const handleClick = () => {
-    console.log("test")
     if(currentBox === textBoxxes.length - 1){
       setBgColor('white')
       setCurrentBox(0)
@@ -77,7 +79,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <header className="Home-header">
+      <header className="header">
         <TextBox 
           text={textBoxxes[currentBox].text} 
           textColor={textBoxxes[currentBox].color} 
@@ -89,6 +91,8 @@ const Home = () => {
       {changeBgColor && (
         <Form handleSubmit={handleSubmit} color={color} setColor={setColor}/>
       )}
+      <Arrow image={right_arrow} side={"right"} page={"/Right"}/>
+      <Arrow image={left_arrow} side={"left"} page={"/Left"}/>
     </div>
   );
 }
