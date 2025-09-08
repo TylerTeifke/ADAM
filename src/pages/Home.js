@@ -36,18 +36,44 @@ const Home = () => {
   ]
 
   //Will be used to iterate between text boxes
-  const [currentBox, setCurrentBox] = useState(0)
+  //The default value is either 0 or whatever is stored in session
+  const [currentBox, setCurrentBox] = useState(() => {
+    return parseInt(sessionStorage.getItem('current_text_box') || '0')
+  })
   //Will be used to change the color of the background
-  const [bgColor, setBgColor] = useState('white')
+  const [bgColor, setBgColor] = useState(() => {
+    return sessionStorage.getItem('bgColor') || 'white'
+  })
   //Will be used to determine if the components that change the background will be rendered
-  const [changeBgColor, setChangeBgColor] = useState(false)
-  //Will be used to track wht color the user wants to change the background to
+  const [changeBgColor, setChangeBgColor] = useState(() => {
+    return sessionStorage.getItem('change_form') === 'true'
+  })
+  //Will be used to track what color the user wants to change the background to
   const [color, setColor] = useState("")
 
   //Will run whenever there is a change made to the background color
   useEffect(() => {
     document.body.style.backgroundColor = bgColor
+    sessionStorage.setItem("bgColor", bgColor)
   }, [bgColor])
+
+  //Will save the current text box to session storage every time it is changed
+  useEffect(() => {
+    sessionStorage.setItem("current_text_box", currentBox)
+  }, [currentBox])
+
+  //Will save whether the form to change the bg color is visible or not
+  useEffect(() => {
+    sessionStorage.setItem("change_form", changeBgColor)
+  }, [changeBgColor])
+
+  //Will set the current text box to whatever is saved in session storage every time the page
+  //is reloaded
+  useEffect(() => {
+    setCurrentBox(JSON.parse(sessionStorage.getItem("current_text_box")))
+    setBgColor(sessionStorage.getItem("bgColor"))
+    setChangeBgColor(JSON.parse(sessionStorage.getItem("change_form")))
+  }, [])
 
   //Will change the text box upon clicking ADAM
   const handleClick = () => {
