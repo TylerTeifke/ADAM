@@ -32,7 +32,10 @@ const Home = () => {
     {text: "Just pretend you didn't see that.", color: "black", image: ADAM, animated: ""},
     {text: "Hey I have an idea.", color: "black", image: ADAM, animated: ""},
     {text: "Why don't I share with you some of my unlimited power.", color: "green", image: ADAM_smug, animated: ""},
-    {text: "Just type in what color you want the background to be and click Apply.", color: "black", image: ADAM, animated: ""}
+    {text: "Just type in what color you want the background to be and click Apply.", color: "black", image: ADAM, animated: ""},
+    {text: "Oh, you're probably wondering about those two arrows.", color: "black", image: ADAM, animated: ""},
+    {text: "Those go to my alternate selves in the left and right dimensions.", color: "black", image: ADAM, animated: ""},
+    {text: "Click on either and see what they can do.", color: "black", image: ADAM, animated: ""},
   ]
 
   //Will be used to iterate between text boxes
@@ -115,7 +118,7 @@ const Home = () => {
         />
       </header>
       {changeBgColor && (
-        <Form handleSubmit={handleSubmit} color={color} setColor={setColor}/>
+        <Form handleSubmit={handleSubmit} value={color} setValue={setColor}/>
       )}
       <Arrow image={right_arrow} side={"right"} page={"/Right"}/>
       <Arrow image={left_arrow} side={"left"} page={"/Left"}/>

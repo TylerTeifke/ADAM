@@ -8,7 +8,7 @@ import Arrow from "../components/Arrow";
 const Right = () => {
 
     const textBoxxes = [
-        {text: "Welcome to the right page.", color: "black", image: ADAM, animated: ""}
+        {text: "Welcome to the right dimension.", color: "black", image: ADAM, animated: ""}
     ]
 
     //Will be used to iterate between text boxes

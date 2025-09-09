@@ -1,11 +1,11 @@
 /**
- * Will be used to display the form for changing the background color
+ * Will be used to display the form for changing various attributes
  * @param {} param0 
  */
 import "./Form.css"
 import { useRef } from "react"
 
-const Form = ({handleSubmit, color, setColor}) => {
+const Form = ({handleSubmit, value, setValue}) => {
     const inputRef = useRef()
 
     return(
@@ -13,16 +13,16 @@ const Form = ({handleSubmit, color, setColor}) => {
             <input
                 autoFocus
                 ref={inputRef}
-                id='changeColor'
+                id='valueInput'
                 type='text'
-                placeholder='Color'
+                placeholder='Input'
                 required
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
             />
             <button
                 type='submit'
-                aria-label='Change Color'
+                aria-label='Change Value'
                 onClick={() => inputRef.current.focus()}
             >
             Apply

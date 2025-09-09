@@ -3,11 +3,17 @@
  */
 import "./TextBox.css"
 
-const TextBox = ({ text, textColor, image, handleClick, animated }) => {
+const TextBox = ({ text, textColor, image, handleClick, animated, scale = 1 }) => {
 
     return (
         <div>
-            <img src={image} className={`ADAM ${animated}`} alt="" onClick={handleClick}/>
+            <img 
+             src={image}
+             className={`ADAM ${animated}`}
+             alt="" 
+             onClick={handleClick} 
+             style={{scale: scale}}
+            />
             <p style={{color: textColor}}>{text}</p>
         </div>
     )
