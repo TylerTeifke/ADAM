@@ -3,7 +3,7 @@
  */
 import "./TextBox.css"
 
-const TextBox = ({ text, textColor, image, handleClick, animated, scale = 1 }) => {
+const TextBox = ({ text, textColor, image, handleClick, animated, scale = 1, rotation = '360deg' }) => {
 
     return (
         <div>
@@ -12,7 +12,7 @@ const TextBox = ({ text, textColor, image, handleClick, animated, scale = 1 }) =
              className={`ADAM ${animated}`}
              alt="" 
              onClick={handleClick} 
-             style={{scale: scale}}
+             style={{scale: scale, rotate: rotation}}
             />
             <p style={{color: textColor}}>{text}</p>
         </div>
