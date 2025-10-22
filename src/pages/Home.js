@@ -63,7 +63,7 @@ const Home = () => {
   //Will be used to track the text the user wants displayed
   const [text, setText] = useState("")
   //Will be what actually displays the text on screen
-  const [screenText, setScreenText] = useState("Test")
+  const [screenText, setScreenText] = useState("")
 
 
   //Will run whenever there is a change made to the background color
