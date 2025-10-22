@@ -36,6 +36,9 @@ const Home = () => {
     {text: "Oh, you're probably wondering about those two arrows.", color: "black", image: ADAM, animated: ""},
     {text: "Those go to my alternate selves in the left and right dimensions.", color: "black", image: ADAM, animated: ""},
     {text: "Click on either and see what they can do.", color: "black", image: ADAM, animated: ""},
+    {text: "Oh! I just had another great idea.", color: "green", image: ADAM_smug, animated: ""},
+    {text: "Why don't you do what I do and display text to the screen.", color: "green", image: ADAM_smug, animated: ""},
+    {text: "Just type what you want to see and it will be displayed.", color: "black", image: ADAM, animated: ""}
   ]
 
   //Will be used to iterate between text boxes
@@ -51,8 +54,17 @@ const Home = () => {
   const [changeBgColor, setChangeBgColor] = useState(() => {
     return sessionStorage.getItem('change_form') === 'true'
   })
+  //Will be used to determine if the components that displays the user's text will be rendered
+  const [displayText, setDisplayText] = useState(() => {
+    return sessionStorage.getItem('display_text') === 'true'
+  })
   //Will be used to track what color the user wants to change the background to
   const [color, setColor] = useState("")
+  //Will be used to track the text the user wants displayed
+  const [text, setText] = useState("")
+  //Will be what actually displays the text on screen
+  const [screenText, setScreenText] = useState("Test")
+
 
   //Will run whenever there is a change made to the background color
   useEffect(() => {
@@ -70,12 +82,18 @@ const Home = () => {
     sessionStorage.setItem("change_form", changeBgColor)
   }, [changeBgColor])
 
+  //Will save whether the form to enter text is visible or not
+  useEffect(() => {
+    sessionStorage.setItem("display_text", displayText)
+  }, [displayText])
+
   //Will set the current text box to whatever is saved in session storage every time the page
   //is reloaded
   useEffect(() => {
     setCurrentBox(JSON.parse(sessionStorage.getItem("current_text_box")))
     setBgColor(sessionStorage.getItem("bgColor"))
     setChangeBgColor(JSON.parse(sessionStorage.getItem("change_form")))
+    setDisplayText(JSON.parse(sessionStorage.getItem("display_text")))
   }, [])
 
   //Will change the text box upon clicking ADAM
@@ -83,7 +101,7 @@ const Home = () => {
     if(currentBox === textBoxxes.length - 1){
       setBgColor('white')
       setCurrentBox(0)
-      setChangeBgColor(false)
+      setDisplayText(false)
     }
     else{
       if(currentBox === 3){
@@ -95,15 +113,25 @@ const Home = () => {
       if(currentBox === 18){
         setChangeBgColor(true)
       }
+      if(currentBox === 24){
+        setChangeBgColor(false)
+        setDisplayText(true)
+      }
       setCurrentBox(currentBox + 1)
     }
   }
 
   //Will change the bg color to whatever the user wants it to be
-  const handleSubmit = (e) => {
+  const handleBgSubmit = (e) => {
     e.preventDefault()
     setBgColor(color)
     setColor("")
+  }
+
+  const handleTextSubmit = (e) => {
+    e.preventDefault()
+    setScreenText(text)
+    setText("")
   }
 
   return (
@@ -116,9 +144,15 @@ const Home = () => {
           animated={textBoxxes[currentBox].animated} 
           handleClick={handleClick}
         />
+        {displayText && (
+          <p>{screenText}</p>
+        )}
       </header>
       {changeBgColor && (
-        <Form handleSubmit={handleSubmit} value={color} setValue={setColor}/>
+        <Form handleSubmit={handleBgSubmit} value={color} setValue={setColor}/>
+      )}
+      {displayText && (
+        <Form handleSubmit={handleTextSubmit} value={text} setValue={setText}/>
       )}
       <Arrow image={right_arrow} side={"right"} page={"/Right"}/>
       <Arrow image={left_arrow} side={"left"} page={"/Left"}/>
