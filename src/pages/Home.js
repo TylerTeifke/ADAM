@@ -38,7 +38,8 @@ const Home = () => {
     {text: "Click on either and see what they can do.", color: "black", image: ADAM, animated: ""},
     {text: "Oh! I just had another great idea.", color: "green", image: ADAM_smug, animated: ""},
     {text: "Why don't you do what I do and display text to the screen.", color: "green", image: ADAM_smug, animated: ""},
-    {text: "Just type what you want to see and it will be displayed.", color: "black", image: ADAM, animated: ""}
+    {text: "Just type what you want to see and it will be displayed.", color: "black", image: ADAM, animated: ""},
+    {text: "You can also change the color of the text using the second input field.", color: "black", image: ADAM, animated: ""}
   ]
 
   //Will be used to iterate between text boxes
@@ -64,6 +65,10 @@ const Home = () => {
   const [text, setText] = useState("")
   //Will be what actually displays the text on screen
   const [screenText, setScreenText] = useState("")
+  //Will be used to track the color of the text the user wants displayed
+  const [textColor, setTextColor] = useState("")
+  //Will be what actually displays the color of the text on screen
+  const [screenTextColor, setScreenTextColor] = useState("black")
 
 
   //Will run whenever there is a change made to the background color
@@ -134,6 +139,12 @@ const Home = () => {
     setText("")
   }
 
+  const handleTextColorSubmit = (e) => {
+    e.preventDefault()
+    setScreenTextColor(textColor)
+    setTextColor("")
+  }
+
   return (
     <div className="Home">
       <header className="header">
@@ -145,14 +156,17 @@ const Home = () => {
           handleClick={handleClick}
         />
         {displayText && (
-          <p>{screenText}</p>
+          <p style={{color: screenTextColor}}>{screenText}</p>
         )}
       </header>
       {changeBgColor && (
         <Form handleSubmit={handleBgSubmit} value={color} setValue={setColor}/>
       )}
       {displayText && (
-        <Form handleSubmit={handleTextSubmit} value={text} setValue={setText}/>
+        <div>
+          <Form handleSubmit={handleTextSubmit} value={text} setValue={setText}/>
+          <Form handleSubmit={handleTextColorSubmit} value={textColor} setValue={setTextColor}/>
+        </div>
       )}
       <Arrow image={right_arrow} side={"right"} page={"/Right"}/>
       <Arrow image={left_arrow} side={"left"} page={"/Left"}/>
